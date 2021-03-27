@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.printf("For AnagramFinder press 1\n" +
+        System.out.println("For AnagramFinder press 1\n" +
                 "For Linkfinder press 2\nFor calculator press 3\n");
 
         Scanner scan = new Scanner(System.in);
@@ -19,7 +19,7 @@ public class Main {
             String compare1 = scan.next();
             System.out.println("Please enter your second string");
             String compare2 = scan.next();
-            System.out.println("Are there strings anagrams of each other: "+af.findAnagram(compare1,compare2));
+            System.out.println("Are these strings anagrams of each other: "+af.findAnagram(compare1,compare2));
         }
         if (choice==2 ){
             LinkFinder lf = new LinkFinder();

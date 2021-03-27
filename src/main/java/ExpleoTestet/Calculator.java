@@ -1,8 +1,5 @@
 package ExpleoTestet;
 
-import net.bytebuddy.implementation.bytecode.Throw;
-
-import java.nio.channels.ScatteringByteChannel;
 import java.util.ArrayList;
 
 public class Calculator {
@@ -21,8 +18,8 @@ public class Calculator {
     /**
      * calculatorLvl1 är väldigt simplel. Letar upp första förekomsten av en icke siffra och sparar den. Parsar sedan
      * det som är till vänster och höger om denna i stängen till doubles, kollar senare
-     * @param input
-     * @return
+     * @param input String
+     * @return Double
      * @throws Exception
      */
     double calculatorLvl1(String input) throws Exception {
@@ -38,7 +35,7 @@ public class Calculator {
         }
         if (operator == 'f') throw new NumberFormatException("Felakting input");
         double operand1 = Double.parseDouble(input.substring(0, operatorlocation));
-        double operand2 = Double.parseDouble(input.substring(operatorlocation + 1, input.length()));
+        double operand2 = Double.parseDouble(input.substring(operatorlocation + 1));
         if (operator == '+') return operand1 + operand2;
         if (operator == '-') return operand1 - operand2;
         if (operator == '*') return operand1 * operand2;

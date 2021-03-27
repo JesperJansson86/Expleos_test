@@ -1,7 +1,6 @@
 package ExpleoTestet;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 /**
  * findAnagram tar två strängar och kontrollerar ifall de innehåller samma uppsättning tecken (om det är
@@ -20,7 +19,7 @@ public class AnagramFinder {
     String sortString (String input){
         char[] parse = input.toCharArray();
         Arrays.sort(parse);
-        String output = new String(parse);
-        return output;
+        return new String(parse);
+
     }
 }
