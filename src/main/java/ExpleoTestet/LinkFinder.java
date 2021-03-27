@@ -10,10 +10,6 @@ import java.util.List;
 
 public class LinkFinder {
 
-    public static void main(String[] args) {
-        LinkFinder lf = new LinkFinder();
-        lf.findLinks();
-    }
 
     /**
      * findLinks letar upp alla länkar ifrån en websida, jag har hårdkodat in eran ;)
@@ -22,12 +18,12 @@ public class LinkFinder {
      * Dock hade jag sjuka problem att få den att fungera och har därav tagit med
      * Geckodriver, Guava samt ett gäng med Maven dependencies.
      */
-    public void findLinks() {
+    public void findLinks(String url) {
         System.setProperty("webdriver.gecko.driver", "src//main//Gecko//geckodriver.exe");
         FirefoxOptions capabilities = new FirefoxOptions();
         WebDriver webdriver = new FirefoxDriver(capabilities);
         capabilities.setCapability("marionette", true);
-        webdriver.get("https://expleogroup.se/");
+        webdriver.get(url);
         List<WebElement> links = webdriver.findElements(By.tagName("a"));
         for (var link : links
         ) {
