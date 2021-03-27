@@ -2,6 +2,7 @@ package ExpleoTestet;
 
 import net.bytebuddy.implementation.bytecode.Throw;
 
+import java.nio.channels.ScatteringByteChannel;
 import java.util.ArrayList;
 
 public class Calculator {
@@ -9,21 +10,12 @@ public class Calculator {
 
     public static void main(String[] args) throws Exception {
         Calculator c1 = new Calculator();
+        System.out.println(c1.calculatorLvl1("2/3"));
         System.out.println(c1.calculatorLvl3("2+3*40"));
         System.out.println(c1.calculatorLvl3("2*3+4"));
         System.out.println(c1.calculatorLvl3("2/3+4-1"));
         System.out.println(c1.calculatorLvl3("100+5*5/5*5"));
 
-    }
-
-    ArrayList convertStringToArrayList() {
-        String mathstring = "2-3*4";
-        ArrayList list = new ArrayList();
-        for (int i = 0; i < mathstring.length(); i++) {
-            list.add(mathstring.charAt(i));
-        }
-
-        return list;
     }
 
     double calculatorLvl1(String input) throws Exception {
@@ -46,6 +38,7 @@ public class Calculator {
         if (operator == '/') return operand1 / operand2;
 
         else throw new Exception("Hur lyckades du komma hit?");
+
     }
 
     double evaluate(Double operand1, char operator, Double operand2) throws Exception {
@@ -68,8 +61,6 @@ public class Calculator {
                 operators.add(input.charAt(i));
                 whereDoesOperandStart = i + 1;
             }
-
-
         }
         operands.add(Double.parseDouble(input.substring(whereDoesOperandStart)));
         double total = (double) operands.get(0);
@@ -80,6 +71,7 @@ public class Calculator {
         }
         return total;
     }
+
     double calculatorLvl3(String input) throws Exception {
         ArrayList operators = new ArrayList();
         ArrayList operatorlocations = new ArrayList();
@@ -95,85 +87,49 @@ public class Calculator {
                 operatorlocations.add(i);
                 whereDoesOperandStart = i + 1;
             }
-
-
         }
         operands.add(Double.parseDouble(input.substring(whereDoesOperandStart)));
-        int index =0;
+        int index = 0;
         for (var operator : operators
         ) {
-            if ((char)operator =='*'){
-                double temp = (double)operands.get(index)*(double)operands.get(index+1);
+            if ((char) operator == '*') {
+                double temp = (double) operands.get(index) * (double) operands.get(index + 1);
                 operands.remove(index);
                 operands.remove((index));
-                operands.add(index,temp);
+                operands.add(index, temp);
                 removeoperators.add(index);
-            }else if ((char)operator =='/'){
-                double temp = (double)operands.get(index)/(double)operands.get(index+1);
+            } else if ((char) operator == '/') {
+                double temp = (double) operands.get(index) / (double) operands.get(index + 1);
                 operands.remove(index);
                 operands.remove((index));
-                operands.add(index,temp);
+                operands.add(index, temp);
                 removeoperators.add(index);
-            }
-                else index++;
+            } else index++;
         }
-        for (var usedoperator:removeoperators
-             ) {operators.remove((int)usedoperator);
+        for (var usedoperator : removeoperators
+        ) {
+            operators.remove((int) usedoperator);
 
         }
         removeoperators.clear();
         index = 0;
-//        for (var operator : operators
-//        ) {
-//            if ((char)operator =='/'){
-//                double temp = (double)operands.get(index)/(double)operands.get(index+1);
-//                operands.remove(index);
-//                operands.remove((index));
-//                operands.add(index,temp);
-//                removeoperators.add(index);
-//            }
-//           else index++;
-//        }
-//        for (var usedoperator:removeoperators
-//        ) {operators.remove((int)usedoperator);
-//
-//        }
-//        removeoperators.clear();
-//        index = 0;
         for (var operator : operators
         ) {
-            if ((char)operator =='+'){
-                double temp = (double)operands.get(index)+(double)operands.get(index+1);
+            if ((char) operator == '+') {
+                double temp = (double) operands.get(index) + (double) operands.get(index + 1);
                 operands.remove(index);
                 operands.remove((index));
-                operands.add(index,temp);
+                operands.add(index, temp);
                 removeoperators.add(index);
-            }else if ((char)operator =='-'){
-                double temp = (double)operands.get(index)-(double)operands.get(index+1);
+            } else if ((char) operator == '-') {
+                double temp = (double) operands.get(index) - (double) operands.get(index + 1);
                 operands.remove(index);
                 operands.remove((index));
-                operands.add(index,temp);
+                operands.add(index, temp);
                 removeoperators.add(index);
-            }
-           else index++;
+            } else index++;
         }
-//        for (var usedoperator:removeoperators
-//        ) {operators.remove((int)usedoperator);
-//
-//        }
-//        removeoperators.clear();
-//        index = 0;
-//        for (var operator : operators
-//        ) {
-//            if ((char)operator =='-'){
-//                double temp = (double)operands.get(index)-(double)operands.get(index+1);
-//                operands.remove(index);
-//                operands.remove((index));
-//                operands.add(index,temp);
-//                removeoperators.add(index);
-//            }
-//            else index++;
-//        }
-        return (double)operands.get(0);
+
+        return (double) operands.get(0);
     }
 }
